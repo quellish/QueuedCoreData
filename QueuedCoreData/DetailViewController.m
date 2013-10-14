@@ -10,16 +10,23 @@
 
 @interface DetailViewController ()
 - (void)configureView;
+
+@property (strong, nonatomic) id detailItem;
+
+@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
 @end
 
 @implementation DetailViewController
+@synthesize detailDescriptionLabel;
+@synthesize detailItem;
 
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (detailItem != newDetailItem) {
+        detailItem = newDetailItem;
         
         // Update the view.
         [self configureView];

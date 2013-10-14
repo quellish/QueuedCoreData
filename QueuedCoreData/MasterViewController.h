@@ -10,9 +10,17 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface MasterViewController : UITableViewController
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+/**
+ *  initWithParentContext:
+ *  @abstract Creates a new controller given a parent context, allowing the controller to instantiate it's own child.
+ *
+ *  @param context The parent context
+ *
+ *  @return The controller
+ */
+- (instancetype) initWithParentContext:(NSManagedObjectContext *) context;
+- (void) setParentContext:(NSManagedObjectContext *)context;
 
 @end
