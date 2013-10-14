@@ -87,10 +87,14 @@
     NSManagedObjectContext  *context =  nil;
     context = [[self fetchedResultsController] managedObjectContext];
     
+    // Save this context, and only this context. This will NOT save all the way down to the store, but
+    // you will get all the notifications, events, etc. you expect for this context. You are updating a set of changes, saving all the way down
+    // would commit them.
     [self saveContext:context recursively:YES];
     
 }
 
+// Simple pull to refresh. This will run your query again, if that's your thing. No error handling for the demo.
 - (IBAction)refetch:(id) sender {
     NSError *error  = nil;
     if ([[self fetchedResultsController] performFetch:&error]){
@@ -98,6 +102,7 @@
     }
 }
 
+// Save the context recursively all the way down to the store.
 - (void) saveContext:(NSManagedObjectContext *)context recursively:(BOOL)recurse{
     
     [context performBlock:^{
